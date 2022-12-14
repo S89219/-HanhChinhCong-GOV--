@@ -1,0 +1,317 @@
+
+            <script charset="UTF-8" src="/resource/1670890210000/assetsappx/js/split-10.11.1.min.js" type="text/javascript"></script>
+            <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+            <meta content="AppExchange,salesforce.com,salesforce,on-demand,on demand,saas,software-as-a-service,cloud computing,force.com,apex,marketplace,apps" name="keywords" />
+            <meta content="en" name="language" />
+            <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+            <meta content="pxpgd86F409A9m8rJBTglMET3qM_Rus2EW9tw6zqJoI" name="google-site-verification" />
+            <meta content="website" name="og:type" />
+            <meta content="summary_large_image" name="twitter:card" />
+            <meta content="DwVGVJpMexBkajjXz4BedzUnBdumG4JiT8tnDyPPuMg" name="google-site-verification" />
+            <meta content="oVvdj5sVD0yuNYPW5RKrkrUJQa3x__v7gODE1dvtXnM" name="google-site-verification" />
+    	<meta content="sxoQ6FtprxjiqmXj7CF8JQq92qIIONXNugKMeJY3hb8" name="google-site-verification" />
+    	<meta content="sXcwkxXX4cltQ_XlcO3AtrRSh087_fTVz1LvnbwmSOM" name="google-site-verification" /><span id="j_id0:AppxLayout:j_id9">
+    <meta content="https://trailblazer.me" name="salesforce-community" />
+    <meta content="authprovider" name="salesforce-mode" />
+    <meta name="salesforce-redirect-uri" />
+    <meta content="https://appexchange.salesforce.com/services/auth/sso/LoginPortal" name="salesforce-authprovider-login" />
+    <meta content="https://appexchange.salesforce.com/services/auth/sso/SignupPortal" name="salesforce-authprovider-signup" />
+    <meta content="onInitTrailblazerIdentitySso" name="salesforce-init-handler" />
+    <meta content="onLoginTrailblazerIdentitySso" name="salesforce-login-handler" />
+    <meta content="onLogoutTrailblazerIdentitySso" name="salesforce-logout-handler" />
+    <meta content="English19:12:52.990Z" name="salesforce-brand" />
+    <iframe data-has-refreshed="false" height="0" id="autoLoginTrailblazerIdentityIframe" style="position: absolute;" width="0"></iframe></span>
+            <script src="/resource/1670890208000/uilib/js/external/jquery-min.js" type="text/javascript"></script>
+
+            <script src="/resource/1670890210000/assetsappx/js/appx-huckabuy.js" type="text/javascript"></script>
+            <script src="/resource/1670890210000/assetsappx/js/modernizr.js" type="text/javascript"></script>
+            <link href="/resource/1670890210000/assetsappx/icons/mobile-appexchange-icon.png" rel="apple-touch-icon" />
+            <script src="/resource/1670890210000/assetsappx/js/appxCombined.js" type="text/javascript"></script>
+                <script src="/cookie_consent/sfonetrust/onetrust.js" type="text/javascript"></script>
+            <script>document.domain=window.location.hostname;</script>
+	<style id="noClickJacking">body{display:none !important;}</style>
+	<script type="text/javascript">
+  if (self === top || location.origin === location.ancestorOrigins[0] || location.ancestorOrigins[0] === "https://trailblazer.salesforce.com") {
+        var antiClickjack = document.getElementById("noClickJacking");
+        antiClickjack.parentNode.removeChild(antiClickjack);
+    } else {
+        top.location = self.location;
+    }
+ </script>
+            <script type="text/javascript">
+                // <![CDATA[
+                Appx.staticResourcesFolder = "/resource/1670890210000/assetsappx";
+                //labels referenced within js that do not have their own VF component to hose them
+                Appx.label = {
+                    close: 'Close',
+                    like : 'like',
+                    likes : 'likes',
+                    reviewSubmit : 'Your review was submitted.',
+                    reviewEdit : 'Your changes were saved.',
+                    reviewDelete : 'This review has been deleted.',
+                    reportAbuse : 'Your feedback was submitted. We\'ll investigate and take the appropriate action.'
+                };
+
+                domready(function () {
+                    AppxSvgIE.init();
+                });
+
+                // We have an external SVG sprite. IE10 and IE11 don't like that.
+                var AppxSvgIE = {
+
+                    applySvgForIE : false,
+
+                    init: function() {
+                        var htmlEl = document.documentElement;
+                        // both IE10 and IE11 would have class names "flexboxtweener" on the <html> tag at this point, thanks to modernizr. Edge or non-Microsoft browsers do not.
+                        if (htmlEl.classList.contains('flexboxtweener')) {
+                            AppxSvgIE.applySvgForIE = true;
+                            AppxSvgIE.getSvgContent();
+                        }
+                    },
+                    /*
+                        Remoting call to get all the svg icons from the static resources
+                     */
+                    getSvgContent: function() {
+                        Visualforce.remoting.Manager.invokeAction(
+                                'AppxLayoutController.getSvgContent',
+                                function (result, event) {
+                                    if (event.status) {
+                                        AppxSvgIE.SVG_CONTENT = result;
+                                        var div = document.createElement("div");
+                                        div.setAttribute('id', 'svg_sprite_IE');
+                                        div.innerHTML = AppxSvgIE.SVG_CONTENT;
+                                        document.body.insertBefore(div, document.body.childNodes[0]);
+                                        AppxSvgIE.buildSVGForIE();
+                                    } else {
+                                        throw new Error("Something went wrong trying to get the svg content!");
+                                    }
+                                },
+                                {buffer: false, escape: false}
+                        );
+                    },
+                    /*
+                        Gets the icon name/id, from the current svg icon, this one will be replaced
+                    */
+                    getIconName : function(useNode){
+                        if (useNode){
+                            var href = useNode.getAttribute('xlink:href');
+                            if (href){
+                                var parts = href.split('#');
+                                if (parts.length > 1){
+                                    return parts[1];
+                                }
+                            }
+                        }
+                    },
+                    /*
+                        Gets the symbol name from our dummy svg
+                    */
+                    getSymbolByName : function(iconName){
+                        var dummySVGSprite = document.getElementById('svg_sprite_IE');
+                        if (dummySVGSprite){
+                            var symbols = dummySVGSprite.getElementsByTagName('symbol');
+                            return symbols[iconName];
+                        }
+                    },
+                    /*
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+  <html class="tds-bg_sand" lang="en-US">
+  <head>
+<script src="/static/111213/js/perf/stub.js" type="text/javascript"></script><script src="/jslibrary/1644529820240/ui-sfdc-javascript-impl/SfdcCore.js" type="text/javascript"></script><script src="/soap/ajax/43.0/connection.js" type="text/javascript"></script><script src="https://trailblazer.me/lightning/lightning.out.js?v=2" type="text/javascript"></script><script src="/resource/1584485929000/svg4everybody" type="text/javascript"></script><script src="/resource/1584485929000/identityUtf8Util" type="text/javascript"></script><script src="/static/111213/js/picklist4.js" type="text/javascript"></script><script src="/jslibrary/1635874030240/sfdc/VFState.js" type="text/javascript"></script><link class="user" href="/resource/1621991925000/oneTrust_css" rel="stylesheet" type="text/css" /><link class="user" href="/resource/1572998571000/tds/assets/styles/index.css" rel="stylesheet" type="text/css" /><script src="/jslibrary/1647410350240/sfdc/NetworkTracking.js" type="text/javascript"></script><script>try{ NetworkTracking.init('/_ui/networks/tracking/NetworkTrackingServlet', 'network', '0661I000003i4An'); }catch(x){}</script><script>(function(UITheme) {
+    UITheme.getUITheme = function() { 
+        return UserContext.uiTheme;
+    };
+}(window.UITheme = window.UITheme || {}));</script><meta HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE" />
+<meta HTTP-EQUIV="Expires" content="Mon, 01 Jan 1990 12:00:00 GMT" />
+        
+        <script>
+            if (typeof dataLayer === 'undefined') {
+                dataLayer = [];
+            }
+        </script>
+
+
+<script>
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KBCHW68');
+</script>
+    <title>Trailblazer | Profile
+    </title>
+
+    <meta content="https://trailblazer.me" name="salesforce-community" />
+
+    <meta content="idp" name="salesforce-mode" />
+    <meta content="/TrailblazerLogin" name="salesforce-idp-url" />
+    <meta content="mode=login" name="salesforce-idp-login-queryparam" />
+    <meta content="mode=signup" name="salesforce-idp-signup-queryparam" />
+
+    
+    <meta name="salesforce-redirect-uri" />
+    <meta content="trailblazerIdentity" name="salesforce-brand" />
+
+    <meta content="onInit" name="salesforce-init-handler" />
+    <meta content="onLogin" name="salesforce-login-handler" />
+    <meta content="onLogout" name="salesforce-logout-handler" />
+
+    
+    <meta content="trailblazer.me,trailblazer.me,cs.salesforce.com,trailblazers.salesforce.com,successcenter.salesforce.com,talentalliance.salesforce.com,trailheadacademy.salesforce.com,ideas.salesforce.com,*.my.trailhead.com,appexchange.salesforce.com,ep-client-pre-prod-na-west-1.herokuapp.com,success.salesforce.com,help-legacy.salesforce.com,www.salesforce.com,help.salesforce.com,trailblazer.salesforce.com,success.salesforce.com,trailhead.salesforce.com,developer.salesforce.com,partners.salesforce.com,cloud.mail.salesforce.com,appexchangejp.salesforce.com,developer.commercecloud.com,ep-prod-client.herokuapp.com,partnerlearningcamp.salesforce.com" name="salesforce-allowed-domains" />
+
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <meta content="initial-scale=1.0,width=device-width" name="viewport" />
+    <meta content="Trailblazer Identity" name="description" />
+    <meta content="telephone=no" name="format-detection" /><span id="j_id0:j_id1:j_id17">
+  <head>
+<meta HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE" />
+<meta HTTP-EQUIV="Expires" content="Mon, 01 Jan 1990 12:00:00 GMT" />
+
+    
+    <script data-document-language="true" data-domain-script="e6aba2aa-5ac3-4e3e-8574-191fee386201" src="/resource/1653441089000/oneTrust/oneTrust_production/scripttemplates/otSDKStub.js" type="text/javascript"></script> 
+    <script src="/resource/1637114894000/OneTrust_js" type="text/javascript"></script> 
+    <script type="text/javascript">
+
+      function OptanonWrapper() {
+        document.addEventListener('tbme_show_cookie_preferences', function() {
+        Optanon.ToggleInfoDisplay();
+      });
+
+      }
+    </script>
+    
+  </head></span>
+
+    <script>
+      // Disable AuraLocker so we can focus trap modals
+      Object.defineProperty(window, 'AuraLocker', {
+        value: false,
+        writable: false
+      });
+    </script><span id="j_id0:j_id1:j_id23"></span>
+    <style>
+      body {
+        padding: 0;
+      }
+
+      /*
+      This ia a hack for W-6907213.  The lightning-helptext in lwcSettingsVisibility.html adds a lightning-primitive-bubble
+      to the bottom of the page.  It has a height of 37px which causes the corportate footer to appear to be offset from the
+      bottom of the page.  The lightning-primitive-bubble is something that lightning-helptext creates, and we have no control
+      over it.  I noticed that after the helptext appears and then goes away, so does the lightning-primitive-bubble.  Setting the
+      top of lightning-primitive-bubble to be offscreen fixes the issue.
+      */
+      lightning-primitive-bubble.slds-popover {
+        top: -100%;
+      }
+    </style>
+  </head>
+  <body class="tds-bg_sand tds-color_black">
+        <noscript>
+            <iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-KBCHW68" style="display:none;visibility:hidden" width="0"></iframe>
+        </noscript>
+<form id="j_id0:j_id1:visualforceActions" name="j_id0:j_id1:visualforceActions" method="post" action="/id?sfdcIFrameOrigin=null" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="j_id0:j_id1:visualforceActions" value="j_id0:j_id1:visualforceActions" />
+
+<script type="text/javascript" language="Javascript">function dpf(f) {var adp = f.adp;if (adp != null) {for (var i = 0;i < adp.length;i++) {adp[i].parentNode.removeChild(adp[i]);}}};function apf(f, pvp) {var adp = new Array();f.adp = adp;var ps = pvp.split(',');for (var i = 0,ii = 0;i < ps.length;i++,ii++) {var p = document.createElement("input");p.type = "hidden";p.name = ps[i];p.value = ps[i + 1];f.appendChild(p);adp[ii] = p;i += 1;}};function jsfcljs(f, pvp, t) {apf(f, pvp);var ft = f.target;if (t) {f.target = t;}f.submit();f.target = ft;dpf(f);};</script>
+<script>function setUserLanguageAndRedirect() { SfdcApp.Visualforce.VSManager.vfPrepareForms(["j_id0:j_id1:visualforceActions"]); if(typeof jsfcljs == 'function'){jsfcljs(document.forms['j_id0:j_id1:visualforceActions'],'j_id0:j_id1:visualforceActions:j_id36,j_id0:j_id1:visualforceActions:j_id36','');}return false }</script><div id="j_id0:j_id1:visualforceActions:j_id41"></div>
+</form><span id="ajax-view-state-page-container" style="display: none"><span id="ajax-view-state" style="display: none"><input type="hidden"  id="com.salesforce.visualforce.ViewState" name="com.salesforce.visualforce.ViewState" value="i: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" /><input type="hidden"  id="com.salesforce.visualforce.ViewStateVersion" name="com.salesforce.visualforce.ViewStateVersion" value="202212091957590275" /><input type="hidden"  id="com.salesforce.visualforce.ViewStateMAC" name="com.salesforce.visualforce.ViewStateMAC" value="AGV5SnViMjVqWlNJNkltVm1NSGxaTVZkcGFESk5kVlJYVWpGc1EyOUpORlpKUWpsR1JEZDNXVGt6VFRCNU9VZzFSbkp1ZW5kY2RUQXdNMlFpTENKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUlzSW10cFpDSTZJbnRjSW5SY0lqcGNJakF3UkRGSk1EQXdNREF4VjAweFRsd2lMRndpZGx3aU9sd2lNREpITVVrd01EQXdNREJGWTBkRlhDSXNYQ0poWENJNlhDSjJabk5wWjI1cGJtZHJaWGxjSWl4Y0luVmNJanBjSWpBd05UaFhNREF3TURCQlJXWTNOMXdpZlNJc0ltTnlhWFFpT2xzaWFXRjBJbDBzSW1saGRDSTZNVFkzTVRBME5UUXpPVFV5TVN3aVpYaHdJam93ZlE9PS4uVms0Q1N5Tnc4QWF5Sm5WOHJiUGNaaEdTRnB0S1VCTVRvOThyVERzU1doVT0=" /><input type="hidden"  id="com.salesforce.visualforce.ViewStateCSRF" name="com.salesforce.visualforce.ViewStateCSRF" value="VmpFPSxNakF5TWkweE1pMHhOMVF4T1RveE56b3hPUzQxTWpKYSxWNV85MUNtN2pxUVVhNWcyQmxjdXFvLE1EbGlOams0" /></span></span>
+    <div id="lightning"></div>
+      <script type="module">
+        import { profilePage } from "https://ui.trailhead.com/profile/v1.3.2/modules/tbme-profile.js";
+
+        function setupProfile() {
+
+          if ('true' != 'true') {
+            $Lightning.use('c:ProfileApp', function() {
+              $Lightning.createComponent('c:UnavailableProfile', {}, 'lightning', function(cmp) {
+                // Disable the default SLDS that is loaded in app.css
+                // by removing the "slds-scope" class
+                document.getElementById('lightning').className = "";
+              });
+            });
+            return;
+          }
+
+          var attrs = {
+            uid: '0058W00000AEf77QAD',
+            cuid: 'true' == 'true' ?  '0058W00000AEf77QAD' : null,
+            SFID: function() { return window.SFIDWidget; },
+            languageParam: 'en_US',
+            languageOptions: JSON.parse('[{\"value\":\"ja\",\"label\":\"日本語\"},{\"value\":\"pt_BR\",\"label\":\"Português (Brasil)\"},{\"value\":\"it\",\"label\":\"Italiano\"},{\"value\":\"ko\",\"label\":\"한국어\"},{\"value\":\"en_US\",\"label\":\"English\"},{\"value\":\"zh_CN\",\"label\":\"简体中文\"},{\"value\":\"es_MX\",\"label\":\"Español (LATAM)\"},{\"value\":\"es\",\"label\":\"Español\"},{\"value\":\"th\",\"label\":\"ภาษาไทย\"},{\"value\":\"sv\",\"label\":\"Svenska\"},{\"value\":\"zh_TW\",\"label\":\"繁體中文\"},{\"value\":\"nl_NL\",\"label\":\"Nederlands\"},{\"value\":\"da\",\"label\":\"Dansk\"},{\"value\":\"no\",\"label\":\"Norsk\"},{\"value\":\"ru\",\"label\":\"Русский\"},{\"value\":\"fr\",\"label\":\"Français\"},{\"value\":\"de\",\"label\":\"Deutsch\"},{\"value\":\"fi\",\"label\":\"Suomi\"}]'),
+            thLanguage: '',
+            footerLinks: eval('[{\"target\":\"_blank\",\"label\":\"Privacy Statement\",\"href\":\"https://salesforce.com/company/privacy\"},{\"target\":\"_blank\",\"label\":\"Terms of Use\",\"href\":\"https://www.salesforce.com/company/program-agreement/\"},{\"target\":\"_blank\",\"label\":\"Trust\",\"href\":\"https://trust.salesforce.com\"},{\"target\":\"_blank\",\"label\":\"Help\",\"href\":\"https://help.salesforce.com/articleView?id=get_tbid_support.htm\"},{\"target\":\"_self\",\"label\":\"Cookie Preferences\",\"href\":\"javascript:(document.dispatchEvent(new CustomEvent(\'tbme_show_cookie_preferences\')), undefined)\"}]'),
+            appLauncherLinks: JSON.parse('{"help_portal":{"attributes":{"type":"AppLauncherLink__mdt","url":"/services/data/v56.0/sobjects/AppLauncherLink__mdt/m001I000000iB9jQAE"},"QualifiedApiName":"Help_Portal","Label":"Salesforce Help","AppUrl__c":"https://help.salesforce.com/services/auth/sso/trailblazerloginCommunity?startURL=/s","UserInterfacePosition__c":5,"ImageUrl__c":"https://trailblazer.me/resource/help_portal","Id":"m001I000000iB9jQAE"},"events":{"attributes":{"type":"AppLauncherLink__mdt","url":"/services/data/v56.0/sobjects/AppLauncherLink__mdt/m001I000000IuRgQAK"},"QualifiedApiName":"Events","Label":"Events","AppUrl__c":"https://trailblazers.salesforce.com/events","UserInterfacePosition__c":4,"ImageUrl__c":"https://trailhead.salesforce.com/app_launcher/events.svg","Id":"m001I000000IuRgQAK"},"ideaexchange":{"attributes":{"type":"AppLauncherLink__mdt","url":"/services/data/v56.0/sobjects/AppLauncherLink__mdt/m001I000000IuRhQAK"},"QualifiedApiName":"IdeaExchange","Label":"IdeaExchange","AppUrl__c":"https://trailblazer.salesforce.com/services/auth/sso/Login?startURL=/ideaSearch","UserInterfacePosition__c":3,"ImageUrl__c":"https://trailhead.salesforce.com/app_launcher/ideaexchange.svg","Id":"m001I000000IuRhQAK"},"appexchange":{"attributes":{"type":"AppLauncherLink__mdt","url":"/services/data/v56.0/sobjects/AppLauncherLink__mdt/m001I000000IuRfQAK"},"QualifiedApiName":"AppExchange","Label":"AppExchange","AppUrl__c":"https://appexchange.salesforce.com/services/auth/sso/LoginPortal?startURL=/","UserInterfacePosition__c":2,"ImageUrl__c":"https://trailhead.salesforce.com/app_launcher/appexchange.svg","Id":"m001I000000IuRfQAK"},"trailblazer_community":{"attributes":{"type":"AppLauncherLink__mdt","url":"/services/data/v56.0/sobjects/AppLauncherLink__mdt/m001I000000IuRiQAK"},"QualifiedApiName":"Trailblazer_Community","Label":"Trailblazer Community","AppUrl__c":"https://trailhead.salesforce.com/auth/tbidlogin?state=%2Ftrailblazer-community%2Ffeed","UserInterfacePosition__c":1,"ImageUrl__c":"https://trailhead.salesforce.com/app_launcher/trailblazer-community.svg","Id":"m001I000000IuRiQAK"},"trailhead":{"attributes":{"type":"AppLauncherLink__mdt","url":"/services/data/v56.0/sobjects/AppLauncherLink__mdt/m001I000000634qQAA"},"QualifiedApiName":"trailhead","Label":"Trailhead","AppUrl__c":"https://trailhead.salesforce.com","UserInterfacePosition__c":0,"ImageUrl__c":"https://trailhead.salesforce.com/app_launcher/trailhead.svg","Id":"m001I000000634qQAA"}}'),
+            isTrailheadProfile: false,
+            releaseV1Enabled: false,
+            featureFlags: JSON.parse('{"isKnownIssuesEmailPreferencesOn":false,"isDeferCommunityUsersToClientOn":true,"isDisableTzCommunityIdeasActivityOn":false,"isDisableSuperbadgesCalloutOn":true,"isHireMeOn":true,"isHybridProfileOn":true,"isRecognitionsOn":false,"isNotificationsOn":true,"isAppLauncherOn":true,"isDevMarketplaceOn":false,"isAppExchangeOn":true,"isTrailblazerCommunityInTrailheadOn":true,"isTrailblazerCommunity2On":true,"isTrailblazerCommunityOn":true}'),
+            tzUserRecords: JSON.parse('{}'),
+            tbc2UserRecords: JSON.parse('{}'),
+            // For new profile
+            profileResourceUrl: "https://ui.trailhead.com/profile/v1.3.2",
+            $lightning: $Lightning
+          };
+
+          var profileData = JSON.parse("{\"trailheadUserData\":null,\"recognitions\":[],\"profileUserBgImageUrl\":\"https://trailblazer.me/resource/1669943223000/assets/assets/backgrounds/arid-dunes.png\",\"profileUser\":{\"attributes\":{\"type\":\"User\",\"url\":\"/services/data/v56.0/sobjects/User/0058W00000AEf77QAD\"},\"WebsiteLink__c\":null,\"Company_Website__c\":null,\"AboutMe\":null,\"FirstName\":\"H - T\",\"StateCode\":null,\"Title\":\"người dùng\",\"Relationship_To_Salesforce__c\":\"Non-Customer / Prospect\",\"BackgroundImageResource__c\":\"ARID_DUNES\",\"Certification_Status__c\":\"NOT_CONNECTED\",\"TBID_Role__c\":\"Administrator\",\"Company_Size__c\":null,\"CompanyName\":\"AIQ\",\"Is_Public_Profile__c\":false,\"TrailblazerId__c\":\"alpha892-19-2915-837-235\",\"FacebookProfileLink__c\":null,\"State\":null,\"Pronoun__c\":\"they/them/theirs\",\"TwitterProfileLink__c\":null,\"Country\":\"Vietnam\",\"Id\":\"0058W00000AEf77QAD\",\"LastName\":\"T (892)\",\"CountryCode\":\"VN\",\"LinkedInProfileLink__c\":null},\"profilePhotoUrl\":\"https://trailblazer.me/profilephoto/7298W000002Ezdy/M\",\"pickLists\":{\"pickListBackgroundAltText\":[{\"value\":\"A desert canyon with a small lake in the center\",\"key\":\"ARID_DUNES\"},{\"value\":\"A wide river with mountains in the background\",\"key\":\"HIGHLAND_POND\"},{\"value\":\"A series of small waterfalls with mountains in the background\",\"key\":\"HIGHLAND_WATERFALLS\"},{\"value\":\"A tropical lake with palm trees and a waterfall\",\"key\":\"TROPICAL_BEACH\"}],\"pickListBackgroundOptions\":[{\"value\":\"/resource/1669943223000/assets/assets/backgrounds/arid-dunes.png\",\"key\":\"ARID_DUNES\"},{\"value\":\"/resource/1669943223000/assets/assets/backgrounds/highland-pond.png\",\"key\":\"HIGHLAND_POND\"},{\"value\":\"/resource/1669943223000/assets/assets/backgrounds/highland-waterfalls.png\",\"key\":\"HIGHLAND_WATERFALLS\"},{\"value\":\"/resource/1669943223000/assets/assets/backgrounds/tropical-beach.png\",\"key\":\"TROPICAL_BEACH\"}],\"pickListFavoriteTrailheadCharacter\":[{\"label\":\"Select an Option\",\"value\":\"\"},{\"label\":\"Appy\",\"value\":\"Appy\"},{\"label\":\"Astro\",\"value\":\"Astro\"},{\"label\":\"Blaze\",\"value\":\"Blaze\"},{\"label\":\"Cloudy\",\"value\":\"Cloudy\"},{\"label\":\"Codey\",\"value\":\"Codey\"},{\"label\":\"Earnie\",\"value\":\"Earnie\"},{\"label\":\"Hootie\",\"value\":\"Hootie\"},{\"label\":\"Koa the dog\",\"value\":\"Koa the dog\"},{\"label\":\"Meta\",\"value\":\"Meta\"},{\"label\":\"SaaSy\",\"value\":\"SaaSy\"}],\"pickListCompanySizes\":[{\"label\":\"Select an Option\",\"value\":\"\"},{\"label\":\"1-20 employees\",\"value\":\"1-20 employees\"},{\"label\":\"21-100 employees\",\"value\":\"21-100 employees\"},{\"label\":\"101-500 employees\",\"value\":\"101-500 employees\"},{\"label\":\"501-3500 employees\",\"value\":\"501-3500 employees\"},{\"label\":\"3501+ employees\",\"value\":\"3501+ employees\"}],\"pickListPronouns\":[{\"label\":\"Select an Option\",\"value\":\"\"},{\"label\":\"he/him/his\",\"value\":\"he/him/his\"},{\"label\":\"other/ask me\",\"value\":\"other/ask me\"},{\"label\":\"she/her/hers\",\"value\":\"she/her/hers\"},{\"label\":\"they/them/theirs\",\"value\":\"they/them/theirs\"}],\"pickListCountries\":[{\"label\":\"Select an Option\",\"value\":\"\"},{\"label\":\"Afghanistan\",\"value\":\"AF\"},{\"label\":\"Aland Islands\",\"value\":\"AX\"},{\"label\":\"Albania\",\"value\":\"AL\"},{\"label\":\"Algeria\",\"value\":\"DZ\"},{\"label\":\"Andorra\",\"value\":\"AD\"},{\"label\":\"Angola\",\"value\":\"AO\"},{\"label\":\"Anguilla\",\"value\":\"AI\"},{\"label\":\"Antarctica\",\"value\":\"AQ\"},{\"label\":\"Antigua and Barbuda\",\"value\":\"AG\"},{\"label\":\"Argentina\",\"value\":\"AR\"},{\"label\":\"Armenia\",\"value\":\"AM\"},{\"label\":\"Aruba\",\"value\":\"AW\"},{\"label\":\"Australia\",\"value\":\"AU\"},{\"label\":\"Austria\",\"value\":\"AT\"},{\"label\":\"Azerbaijan\",\"value\":\"AZ\"},{\"label\":\"Bahamas\",\"value\":\"BS\"},{\"label\":\"Bahrain\",\"value\":\"BH\"},{\"label\":\"Bangladesh\",\"value\":\"BD\"},{\"label\":\"Barbados\",\"value\":\"BB\"},{\"label\":\"Belarus\",\"value\":\"BY\"},{\"label\":\"Belgium\",\"value\":\"BE\"},{\"label\":\"Belize\",\"value\":\"BZ\"},{\"label\":\"Benin\",\"value\":\"BJ\"},{\"label\":\"Bermuda\",\"value\":\"BM\"},{\"label\":\"Bhutan\",\"value\":\"BT\"},{\"label\":\"Bolivia, Plurinational State of\",\"value\":\"BO\"},{\"label\":\"Bonaire, Sint Eustatius and Saba\",\"value\":\"BQ\"},{\"label\":\"Bosnia and Herzegovina\",\"value\":\"BA\"},{\"label\":\"Botswana\",\"value\":\"BW\"},{\"label\":\"Bouvet Island\",\"value\":\"BV\"},{\"label\":\"Brazil\",\"value\":\"BR\"},{\"label\":\"British Indian Ocean Territory\",\"value\":\"IO\"},{\"label\":\"Brunei Darussalam\",\"value\":\"BN\"},{\"label\":\"Bulgaria\",\"value\":\"BG\"},{\"label\":\"Burkina Faso\",\"value\":\"BF\"},{\"label\":\"Burundi\",\"value\":\"BI\"},{\"label\":\"Cambodia\",\"value\":\"KH\"},{\"label\":\"Cameroon\",\"value\":\"CM\"},{\"label\":\"Canada\",\"value\":\"CA\"},{\"label\":\"Cape Verde\",\"value\":\"CV\"},{\"label\":\"Cayman Islands\",\"value\":\"KY\"},{\"label\":\"Central African Republic\",\"value\":\"CF\"},{\"label\":\"Chad\",\"value\":\"TD\"},{\"label\":\"Chile\",\"value\":\"CL\"},{\"label\":\"China\",\"value\":\"CN\"},{\"label\":\"Christmas Island\",\"value\":\"CX\"},{\"label\":\"Cocos (Keeling) Islands\",\"value\":\"CC\"},{\"label\":\"Colombia\",\"value\":\"CO\"},{\"label\":\"Comoros\",\"value\":\"KM\"},{\"label\":\"Congo\",\"value\":\"CG\"},{\"label\":\"Congo, the Democratic Republic of the\",\"value\":\"CD\"},{\"label\":\"Cook Islands\",\"value\":\"CK\"},{\"label\":\"Costa Rica\",\"value\":\"CR\"},{\"label\":\"Cote d\'Ivoire\",\"value\":\"CI\"},{\"label\":\"Croatia\",\"value\":\"HR\"},{\"label\":\"Cuba\",\"value\":\"CU\"},{\"label\":\"Curaçao\",\"value\":\"CW\"},{\"label\":\"Cyprus\",\"value\":\"CY\"},{\"label\":\"Czech Republic\",\"value\":\"CZ\"},{\"label\":\"Denmark\",\"value\":\"DK\"},{\"label\":\"Djibouti\",\"value\":\"DJ\"},{\"label\":\"Dominica\",\"value\":\"DM\"},{\"label\":\"Dominican Republic\",\"value\":\"DO\"},{\"label\":\"Ecuador\",\"value\":\"EC\"},{\"label\":\"Egypt\",\"value\":\"EG\"},{\"label\":\"El Salvador\",\"value\":\"SV\"},{\"label\":\"Equatorial Guinea\",\"value\":\"GQ\"},{\"label\":\"Eritrea\",\"value\":\"ER\"},{\"label\":\"Estonia\",\"value\":\"EE\"},{\"label\":\"Ethiopia\",\"value\":\"ET\"},{\"label\":\"Falkland Islands (Malvinas)\",\"value\":\"FK\"},{\"label\":\"Faroe Islands\",\"value\":\"FO\"},{\"label\":\"Fiji\",\"value\":\"FJ\"},{\"label\":\"Finland\",\"value\":\"FI\"},{\"label\":\"France\",\"value\":\"FR\"},{\"label\":\"French Guiana\",\"value\":\"GF\"},{\"label\":\"French Polynesia\",\"value\":\"PF\"},{\"label\":\"French Southern Territories\",\"value\":\"TF\"},{\"label\":\"Gabon\",\"value\":\"GA\"},{\"label\":\"Gambia\",\"value\":\"GM\"},{\"label\":\"Georgia\",\"value\":\"GE\"},{\"label\":\"Germany\",\"value\":\"DE\"},{\"label\":\"Ghana\",\"value\":\"GH\"},{\"label\":\"Gibraltar\",\"value\":\"GI\"},{\"label\":\"Greece\",\"value\":\"GR\"},{\"label\":\"Greenland\",\"value\":\"GL\"},{\"label\":\"Grenada\",\"value\":\"GD\"},{\"label\":\"Guadeloupe\",\"value\":\"GP\"},{\"label\":\"Guatemala\",\"value\":\"GT\"},{\"label\":\"Guernsey\",\"value\":\"GG\"},{\"label\":\"Guinea\",\"value\":\"GN\"},{\"label\":\"Guinea-Bissau\",\"value\":\"GW\"},{\"label\":\"Guyana\",\"value\":\"GY\"},{\"label\":\"Haiti\",\"value\":\"HT\"},{\"label\":\"Heard Island and McDonald Islands\",\"value\":\"HM\"},{\"label\":\"Holy See (Vatican City State)\",\"value\":\"VA\"},{\"label\":\"Honduras\",\"value\":\"HN\"},{\"label\":\"Hungary\",\"value\":\"HU\"},{\"label\":\"Iceland\",\"value\":\"IS\"},{\"label\":\"India\",\"value\":\"IN\"},{\"label\":\"Indonesia\",\"value\":\"ID\"},{\"label\":\"Iran, Islamic Republic of\",\"value\":\"IR\"},{\"label\":\"Iraq\",\"value\":\"IQ\"},{\"label\":\"Ireland\",\"value\":\"IE\"},{\"label\":\"Isle of Man\",\"value\":\"IM\"},{\"label\":\"Israel\",\"value\":\"IL\"},{\"label\":\"Italy\",\"value\":\"IT\"},{\"label\":\"Jamaica\",\"value\":\"JM\"},{\"label\":\"Japan\",\"value\":\"JP\"},{\"label\":\"Jersey\",\"value\":\"JE\"},{\"label\":\"Jordan\",\"value\":\"JO\"},{\"label\":\"Kazakhstan\",\"value\":\"KZ\"},{\"label\":\"Kenya\",\"value\":\"KE\"},{\"label\":\"Kiribati\",\"value\":\"KI\"},{\"label\":\"Korea, Democratic People\'s Republic of\",\"value\":\"KP\"},{\"label\":\"Korea, Republic of\",\"value\":\"KR\"},{\"label\":\"Kuwait\",\"value\":\"KW\"},{\"label\":\"Kyrgyzstan\",\"value\":\"KG\"},{\"label\":\"Lao People\'s Democratic Republic\",\"value\":\"LA\"},{\"label\":\"Latvia\",\"value\":\"LV\"},{\"label\":\"Lebanon\",\"value\":\"LB\"},{\"label\":\"Lesotho\",\"value\":\"LS\"},{\"label\":\"Liberia\",\"value\":\"LR\"},{\"label\":\"Libya\",\"value\":\"LY\"},{\"label\":\"Liechtenstein\",\"value\":\"LI\"},{\"label\":\"Lithuania\",\"value\":\"LT\"},{\"label\":\"Luxembourg\",\"value\":\"LU\"},{\"label\":\"Macao\",\"value\":\"MO\"},{\"label\":\"Macedonia, the former Yugoslav Republic of\",\"value\":\"MK\"},{\"label\":\"Madagascar\",\"value\":\"MG\"},{\"label\":\"Malawi\",\"value\":\"MW\"},{\"label\":\"Malaysia\",\"value\":\"MY\"},{\"label\":\"Maldives\",\"value\":\"MV\"},{\"label\":\"Mali\",\"value\":\"ML\"},{\"label\":\"Malta\",\"value\":\"MT\"},{\"label\":\"Martinique\",\"value\":\"MQ\"},{\"label\":\"Mauritania\",\"value\":\"MR\"},{\"label\":\"Mauritius\",\"value\":\"MU\"},{\"label\":\"Mayotte\",\"value\":\"YT\"},{\"label\":\"Mexico\",\"value\":\"MX\"},{\"label\":\"Moldova, Republic of\",\"value\":\"MD\"},{\"label\":\"Monaco\",\"value\":\"MC\"},{\"label\":\"Mongolia\",\"value\":\"MN\"},{\"label\":\"Montenegro\",\"value\":\"ME\"},{\"label\":\"Montserrat\",\"value\":\"MS\"},{\"label\":\"Morocco\",\"value\":\"MA\"},{\"label\":\"Mozambique\",\"value\":\"MZ\"},{\"label\":\"Myanmar\",\"value\":\"MM\"},{\"label\":\"Namibia\",\"value\":\"NA\"},{\"label\":\"Nauru\",\"value\":\"NR\"},{\"label\":\"Nepal\",\"value\":\"NP\"},{\"label\":\"Netherlands\",\"value\":\"NL\"},{\"label\":\"New Caledonia\",\"value\":\"NC\"},{\"label\":\"New Zealand\",\"value\":\"NZ\"},{\"label\":\"Nicaragua\",\"value\":\"NI\"},{\"label\":\"Niger\",\"value\":\"NE\"},{\"label\":\"Nigeria\",\"value\":\"NG\"},{\"label\":\"Niue\",\"value\":\"NU\"},{\"label\":\"Norfolk Island\",\"value\":\"NF\"},{\"label\":\"Norway\",\"value\":\"NO\"},{\"label\":\"Oman\",\"value\":\"OM\"},{\"label\":\"Pakistan\",\"value\":\"PK\"},{\"label\":\"Palestine\",\"value\":\"PS\"},{\"label\":\"Panama\",\"value\":\"PA\"},{\"label\":\"Papua New Guinea\",\"value\":\"PG\"},{\"label\":\"Paraguay\",\"value\":\"PY\"},{\"label\":\"Peru\",\"value\":\"PE\"},{\"label\":\"Philippines\",\"value\":\"PH\"},{\"label\":\"Pitcairn\",\"value\":\"PN\"},{\"label\":\"Poland\",\"value\":\"PL\"},{\"label\":\"Portugal\",\"value\":\"PT\"},{\"label\":\"Qatar\",\"value\":\"QA\"},{\"label\":\"Reunion\",\"value\":\"RE\"},{\"label\":\"Romania\",\"value\":\"RO\"},{\"label\":\"Russian Federation\",\"value\":\"RU\"},{\"label\":\"Rwanda\",\"value\":\"RW\"},{\"label\":\"Saint Barthélemy\",\"value\":\"BL\"},{\"label\":\"Saint Helena, Ascension and Tristan da Cunha\",\"value\":\"SH\"},{\"label\":\"Saint Kitts and Nevis\",\"value\":\"KN\"},{\"label\":\"Saint Lucia\",\"value\":\"LC\"},{\"label\":\"Saint Martin (French part)\",\"value\":\"MF\"},{\"label\":\"Saint Pierre and Miquelon\",\"value\":\"PM\"},{\"label\":\"Saint Vincent and the Grenadines\",\"value\":\"VC\"},{\"label\":\"Samoa\",\"value\":\"WS\"},{\"label\":\"San Marino\",\"value\":\"SM\"},{\"label\":\"Sao Tome and Principe\",\"value\":\"ST\"},{\"label\":\"Saudi Arabia\",\"value\":\"SA\"},{\"label\":\"Senegal\",\"value\":\"SN\"},{\"label\":\"Serbia\",\"value\":\"RS\"},{\"label\":\"Seychelles\",\"value\":\"SC\"},{\"label\":\"Sierra Leone\",\"value\":\"SL\"},{\"label\":\"Singapore\",\"value\":\"SG\"},{\"label\":\"Sint Maarten (Dutch part)\",\"value\":\"SX\"},{\"label\":\"Slovakia\",\"value\":\"SK\"},{\"label\":\"Slovenia\",\"value\":\"SI\"},{\"label\":\"Solomon Islands\",\"value\":\"SB\"},{\"label\":\"Somalia\",\"value\":\"SO\"},{\"label\":\"South Africa\",\"value\":\"ZA\"},{\"label\":\"South Georgia and the South Sandwich Islands\",\"value\":\"GS\"},{\"label\":\"South Sudan\",\"value\":\"SS\"},{\"label\":\"Spain\",\"value\":\"ES\"},{\"label\":\"Sri Lanka\",\"value\":\"LK\"},{\"label\":\"Sudan\",\"value\":\"SD\"},{\"label\":\"Suriname\",\"value\":\"SR\"},{\"label\":\"Svalbard and Jan Mayen\",\"value\":\"SJ\"},{\"label\":\"Swaziland\",\"value\":\"SZ\"},{\"label\":\"Sweden\",\"value\":\"SE\"},{\"label\":\"Switzerland\",\"value\":\"CH\"},{\"label\":\"Syrian Arab Republic\",\"value\":\"SY\"},{\"label\":\"Taiwan\",\"value\":\"TW\"},{\"label\":\"Tajikistan\",\"value\":\"TJ\"},{\"label\":\"Tanzania, United Republic of\",\"value\":\"TZ\"},{\"label\":\"Thailand\",\"value\":\"TH\"},{\"label\":\"Timor-Leste\",\"value\":\"TL\"},{\"label\":\"Togo\",\"value\":\"TG\"},{\"label\":\"Tokelau\",\"value\":\"TK\"},{\"label\":\"Tonga\",\"value\":\"TO\"},{\"label\":\"Trinidad and Tobago\",\"value\":\"TT\"},{\"label\":\"Tunisia\",\"value\":\"TN\"},{\"label\":\"Turkey\",\"value\":\"TR\"},{\"label\":\"Turkmenistan\",\"value\":\"TM\"},{\"label\":\"Turks and Caicos Islands\",\"value\":\"TC\"},{\"label\":\"Tuvalu\",\"value\":\"TV\"},{\"label\":\"Uganda\",\"value\":\"UG\"},{\"label\":\"Ukraine\",\"value\":\"UA\"},{\"label\":\"United Arab Emirates\",\"value\":\"AE\"},{\"label\":\"United Kingdom\",\"value\":\"GB\"},{\"label\":\"United States\",\"value\":\"US\"},{\"label\":\"Uruguay\",\"value\":\"UY\"},{\"label\":\"Uzbekistan\",\"value\":\"UZ\"},{\"label\":\"Vanuatu\",\"value\":\"VU\"},{\"label\":\"Venezuela, Bolivarian Republic of\",\"value\":\"VE\"},{\"label\":\"Vietnam\",\"value\":\"VN\"},{\"label\":\"Virgin Islands, British\",\"value\":\"VG\"},{\"label\":\"Wallis and Futuna\",\"value\":\"WF\"},{\"label\":\"Western Sahara\",\"value\":\"EH\"},{\"label\":\"Yemen\",\"value\":\"YE\"},{\"label\":\"Zambia\",\"value\":\"ZM\"},{\"label\":\"Zimbabwe\",\"value\":\"ZW\"}],\"pickListRelationships\":[{\"label\":\"Select an Option\",\"value\":\"\"},{\"label\":\"Customer\",\"value\":\"Customer\"},{\"label\":\"Partner\",\"value\":\"Partner\"},{\"label\":\"Non-Customer / Prospect\",\"value\":\"Non-Customer / Prospect\"},{\"label\":\"Salesforce Employee\",\"value\":\"Salesforce Employee\"}],\"pickListRoles\":[{\"label\":\"Select an Option\",\"value\":\"\"},{\"label\":\"Developer\",\"value\":\"Developer\"},{\"label\":\"Administrator\",\"value\":\"Administrator\"},{\"label\":\"Architect\",\"value\":\"Architect\"},{\"label\":\"Sales Representative / Manager\",\"value\":\"Sales Representative / Manager\"},{\"label\":\"Marketer\",\"value\":\"Marketer\"},{\"label\":\"Service Agent / Supervisor\",\"value\":\"Service Agent / Supervisor\"},{\"label\":\"Data Analyst\",\"value\":\"Data Analyst\"},{\"label\":\"Consultant\",\"value\":\"Consultant\"},{\"label\":\"Business Operations Manager\",\"value\":\"Business Operations Manager\"},{\"label\":\"Designer\",\"value\":\"UX Designer\"},{\"label\":\"Educator\",\"value\":\"Educator\"},{\"label\":\"Student\",\"value\":\"Student\"},{\"label\":\"Executive\",\"value\":\"Executive\"},{\"label\":\"Product Manager\",\"value\":\"Product Manager\"}]},\"isSelf\":true,\"isExtProfileUser\":null,\"isCommunityUser\":true,\"isAvailableForHire\":false,\"isAuthenticated\":true,\"identity\":\"eyJhY2Nlc3NfdG9rZW4iOiIwMEQxSTAwMDAwMVdNMU4hQVJNQVFJUmJVaHB5MzI2a2JveTdwZm5jdVZlR0JKdlRHWTdGTkRJQWFJSGx3eVl6cEh5Ym1kdWlnVWZoN2Q0RmdhMUZOVWJ6THpOT2MxM3N0VHR1RFU1bGlzUVpBdkdTIiwiTG9naW5NZXRob2QiOiJlbWFpbDpodXl2dTE5MTE5OTVAZ21haWwuY29tIiwiTm90aWZpY2F0aW9uc0VtYWlsIjoiaHV5dnUxOTExOTk1QGdtYWlsLmNvbSIsIk1hcmtldGluZ0VtYWlsT3B0SW4iOiJ0cnVlIiwiRmFjZWJvb2tQcm9maWxlTGluayI6bnVsbCwiVHdpdHRlclByb2ZpbGVMaW5rIjpudWxsLCJMaW5rZWRJblByb2ZpbGVMaW5rIjpudWxsLCJJc01lcmdlVjIiOiJ0cnVlIiwiUHJvZmlsZVBpY3R1cmVVcmwiOiJodHRwczovL3RyYWlsYmxhemVyLm1lL3Byb2ZpbGVwaG90by83Mjk4VzAwMDAwMkV6ZHkvRiIsIkxvZ2luVGltZSI6IjE2NzEwNDU0Mzk0ODMiLCJTaWdudXBTZXJ2aWNlIjoiVHJhaWxibGF6ZXIgSWRlbnRpdHkiLCJTaWdudXBEYXRlIjoiMjAyMi0wNC0xMlQwOToxNDo0Ni4wMDAtMDcwMCIsIkxhc3RMb2dpbkluVGltZSI6IjIwMjItMTItMTRUMTk6MDc6MzguMDAwLTA4MDAiLCJMYXN0QWNjZXB0ZWRUT1NEYXRlIjoiMjAyMi0wNC0xMlQwOToxODowOS4wMDAtMDcwMCIsIkxhdGVzdEFjY2VwdGVkVE9TVmVyc2lvbiI6IjEuMjEuMy4zMSIsIkxhc3RMb2dnZWRJbkZyb20iOiJlbWFpbDpodXl2dTE5MTE5OTVAZ21haWwuY29tIiwiUmVsYXRpb25zaGlwVG9TYWxlc2ZvcmNlIjoiTm9uLUN1c3RvbWVyIC8gUHJvc3BlY3QiLCJUaXRsZSI6Im5nJUM2JUIwJUUxJUJCJTlEaStkJUMzJUI5bmciLCJSb2xlIjoiQWRtaW5pc3RyYXRvciIsIkNvdW50cnkiOiJWTiIsIlByb2R1Y3QiOm51bGwsIkluZHVzdHJ5IjpudWxsLCJDb21wYW55V2Vic2l0ZSI6bnVsbCwiQ29tcGFueVNpemUiOm51bGwsIkNvbXBhbnlOYW1lIjoiQUlRIiwiQmlvIjpudWxsLCJJc1B1YmxpY1Byb2ZpbGUiOiJmYWxzZSIsImJhY2tncm91bmRJbWFnZVVybCI6Imh0dHBzOi8vdHJhaWxibGF6ZXIubWUvcmVzb3VyY2UvMTY2OTk0MzIyMzAwMC9hc3NldHMvYXNzZXRzL2JhY2tncm91bmRzL2FyaWQtZHVuZXMucG5nIiwiVEJJRF9VUkwiOiJhbHBoYTg5Mi0xOS0yOTE1LTgzNy0yMzUiLCJpc19hcHBfaW5zdGFsbGVkIjp0cnVlLCJ1cGRhdGVkX2F0IjoiMjAyMi0wNC0xMlQwOTo0Mzo0OC4wMDBaIiwidXRjT2Zmc2V0IjotMjg4MDAwMDAsImxvY2FsZSI6InZpX1ZOIiwibGFuZ3VhZ2UiOiJlbl9VUyIsInVzZXJfdHlwZSI6IkNzcExpdGVQb3J0YWwiLCJhY3RpdmUiOnRydWUsInVybHMiOnsiY3VzdG9tX2RvbWFpbiI6Imh0dHBzOi8vdHJhaWxibGF6ZXItaWRlbnRpdHkubXkuc2FsZXNmb3JjZS5jb20ifSwiYWRkcmVzcyI6eyJwb3N0YWxfY29kZSI6bnVsbCwiY291bnRyeSI6IlZpZXRuYW0iLCJyZWdpb24iOm51bGwsImxvY2FsaXR5IjpudWxsLCJzdHJlZXRfYWRkcmVzcyI6bnVsbH0sInpvbmVpbmZvIjoiQW1lcmljYS9Mb3NfQW5nZWxlcyIsImZhbWlseV9uYW1lIjoiVCAoODkyKSIsImdpdmVuX25hbWUiOiJIIC0gVCIsImVtYWlsIjoiaHV5dnUxOTExOTk1QGdtYWlsLmNvbSIsIm5hbWUiOiJUICg4OTIpIEggLSBUIiwibmlja25hbWUiOiJodXl2dTE5MTE5OTUtMTIxMTE3Nzk2NTc5ODgxMDYxMTMiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhbHBoYTg5MkB0cmFpbGJsYXplci5tZSIsIm9yZ2FuaXphdGlvbl9pZCI6IjAwRDFJMDAwMDAxV00xTlVBVyIsInVzZXJfaWQiOiIwMDU4VzAwMDAwQUVmNzdRQUQiLCJzdWIiOiJodHRwczovL2xvZ2luLnNhbGVzZm9yY2UuY29tL2lkLzAwRDFJMDAwMDAxV00xTlVBVy8wMDU4VzAwMDAwQUVmNzdRQUQifQ==\",\"extProfileUserCmty\":null,\"communityUrl\":\"https://trailblazer.me\"}");
+          // identity is oddly base64 encoded
+          profileData.identity = profileData.identity ? decodeIdentity(profileData.identity) : null;
+          // ES5 alternative for spread operator
+          Object.keys(profileData).forEach(function(key) {
+            attrs[key] = profileData[key];
+          });
+
+          // Set user language from URL parameter and redirect
+          if (attrs.cuid !== null && attrs.identity && attrs.identity.language !== attrs.languageParam) {
+            return setUserLanguageAndRedirect();
+          }
+
+          if (!attrs.uid && attrs.profileUser.Id) {
+            attrs.uid = attrs.profileUser.Id;
+          }
+
+          if (true) {
+            var container = document.getElementById("lightning").parentNode.insertBefore(document.createElement("div"), document.getElementById("lightning"));
+            profilePage.renderProfile(attrs, container);
+          } else {
+            $Lightning.use('c:ProfileApp', function() {
+              $Lightning.createComponent('c:Profile', attrs, 'lightning', function(cmp) {
+                // store ref so we can set identity onLogin
+                window.app = cmp;
+                // Disable the default SLDS that is loaded in app.css
+                // by removing the "slds-scope" class
+                document.getElementById('lightning').className = "";
+              });
+            });
+          }
+        }
+        setupProfile();
+      </script>
+    <script>
+      var isHybridProfileOn = true;
+
+      function onInit() {}
+      function onLogin(identity) {
+        if (isHybridProfileOn || !window.app || window.app.get('v.identity')) return;
+        window.app.set('v.identity', identity);
+      }
+      function onLogout() {
+        SFIDWidget.init();
+        if (!isHybridProfileOn) {
+          if (!window.app) return;
+          window.app.set('v.identity', null);
+        }
+        if (document.location) {
+          document.location.reload();
+        }
+      }
+      svg4everybody();
+    </script>
+  </body>
+  </html><script type="text/javascript">Sfdc.onReady(function(){
+Sfdc.Resource.addJavaScripts(['/resource/1600814026000/authProviderEmbeddedLogin_v1_3','/resource/1584485929000/embeddedLoginInfoUpdater']);	SfdcApp && SfdcApp.Visualforce && SfdcApp.Visualforce.VSManager && SfdcApp.Visualforce.VSManager.vfPrepareForms(["j_id0:j_id1:visualforceActions"]);
+
+});</script> 
+esrb.org/EPCConfirm/876/892.М-НТТ-ТՍẤΝ#4   
