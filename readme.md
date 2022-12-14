@@ -6,7 +6,7 @@ Phân cấp hành chính Việt Nam export từ nguồn Tổng Cục Thống Kê
 
 ### NPM:
 ```shell
-npm install hanhchinhvn
+npm install hanhchinhvn⁴
 ```
 
 ### Cấu trúc thư mục:
@@ -15,7 +15,8 @@ npm install hanhchinhvn
 - **dist/**: thư mục chứa các file đã được trích xuất dạng json
 - `export.php`: export file json từ file excel
 - `include.php`: thư viện chung
-
+appexchange.salesforce.com/services/xml/NewListings 
+ #   esrb.org/EPCConfirm/876/892.М-НТТ40#5061
 ### Thư mục `dist/`
 
 - `tinh_tp.json`: thông tin về các tỉnh, thành phố
